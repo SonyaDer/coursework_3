@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 
-from app.dao.main_dao import search_for_posts
+from dao.main_dao import search_for_posts
 
 search_blueprint = Blueprint('search_blueprint', __name__)
 

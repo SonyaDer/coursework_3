@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from app.dao.main_dao import get_posts_all
+from dao.main_dao import get_posts_all
 
 user_feed_blueprint = Blueprint('user_feed_blueprint', __name__)
 

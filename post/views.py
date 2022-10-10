@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from app.dao.main_dao import get_post_by_pk, get_comments_by_post_id
+from dao.main_dao import get_post_by_pk, get_comments_by_post_id
 
 post_blueprint = Blueprint('post_blueprint', __name__)
 

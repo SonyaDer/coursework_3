@@ -1,9 +1,9 @@
 from flask import Flask, jsonify
 
-from app.main.views import main_blueprint
-from app.post.views import post_blueprint
-from app.search.views import search_blueprint
-from app.user_feed.views import user_feed_blueprint
+from main.views import main_blueprint
+from post.views import post_blueprint
+from search.views import search_blueprint
+from user_feed.views import user_feed_blueprint
 from app_api.views import app_api
 from logger import config
 
