@@ -26,5 +26,6 @@ def page_error_404(error):
 def page_error_500(error):
     return f'На сервере произошла ошибка {error}', 500
 
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

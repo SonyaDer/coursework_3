@@ -1,7 +1,7 @@
 import json
 
 def open_json(file) -> list:
-    with open(file, encoding="utf-8") as f:
+    with open(file, 'r', encoding='utf-8') as f:
         json_data = json.load(f)
     return json_data
 
@@ -22,35 +22,21 @@ def string_crop(posts_data) -> list:
         post['content'] = post['content'][:50]
     return posts_data
 
-def get_post(posts_data, posts_id) -> dict:
-    output_post = {}
-    for post in posts_data:
-        if posts_id == post['pk']:
-            output_post = post
-    return output_post
+def get_posts_all():
+    with open('data/posts.json', 'r', encoding='ut-8') as f:
+        return json.load(f)
 
-def get_posts_by_user(posts_data, user_name) -> list:
-    output_post = []
-    is_exists = False
-    for post in posts_data:
-        if user_name == post['poster_name']:
-            output_post.append(post)
-            is_exists = True
-    if not is_exists:
-        raise ValueError
-    return output_post
+def get_posts_by_user(user_name):
+    posts = get_posts_all()
+    return [post for post in posts if post['poster_name'] == user_name]
 
-def get_comments_by_post_id(comment_data: dict, id_post: int) -> list:
-    output_post = []
-    is_exists = False
-    for post in comment_data:
-        if id_post == comment_data['post_id']:
-            is_exists = True
-            output_post.append(post)
-    if not is_exists:
-        raise ValueError
+def get_comments_all():
+    with open('data/comments.json', 'r', encoding='ut-8') as f:
+        return json.load(f)
 
-    return output_post
+def get_comments_by_post_id(post_id):
+    comments = get_comments_all()
+    return [comment for comment in comments if comment['post_id'] == post_id]
 
 def search_for_posts(posts_data: list, query: int) -> list:
     output_post = []

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, jsonify
+from flask import Flask, request, render_template, redirect, jsonify, json
 
 import functions
 
@@ -6,18 +6,18 @@ app = Flask('mini_insta')
 
 @app.route('/')
 def main_page():
-    posts_data = functions.open_json('data/data.json')
-    comments_data = functions.open_json('data/comments.json')
-    bookmarks = functions.open_json('data/bookmarks.json')
+        posts_data = functions.open_json('data/posts.json')
+        comments_data = functions.open_json('data/comments.json')
+        bookmarks = functions.open_json('data/bookmarks.json')
 
-    posts_data = functions.string_crop(posts_data)
-    posts_data = functions.comments_count(posts_data, comments_data)
+        posts_data = functions.string_crop(posts_data)
+        posts_data = functions.comments_count(posts_data, comments_data)
 
-    bookmarks_quantity = len(bookmarks)
+        bookmarks_quantity = len(bookmarks)
 
-    return render_template('index.html', posts=posts_data, bookmarks_quantity=bookmarks_quantity)
+        return render_template('index.html', posts=posts_data, bookmarks_quantity=bookmarks_quantity)
 
-@app.route('/post/<postid>')
+@app.route('/posts/<postid>')
 def post_page(postid):
     posts_data = functions.open_json('data/data.json')
     comments_data = functions.open_json('data/comments.json')
@@ -38,7 +38,7 @@ def post_page(postid):
 
 @app.route('/search/')
 def search_page():
-    posts_data = functions.open_json('data/data.json')
+    posts_data = functions.open_json('data/posts.json')
     comments_data = functions.open_json('data/comments.json')
 
     s = request.args.get('s')
@@ -94,5 +94,5 @@ def bookmarks_page():
     return render_template('bookmarks.html', bookmarks=bookmarks)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="localhost", port=5001, debug=True)
 
